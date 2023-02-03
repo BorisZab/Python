@@ -1,14 +1,13 @@
 # Требуется определить, можно ли от шоколадки
-#  размером n × m долек отломить k долек, 
-# если разрешается сделать один разлом по прямой между дольками 
+#  размером n × m долек отломить k долек,
+# если разрешается сделать один разлом по прямой между дольками
 # (то есть разломить шоколадку на два прямоугольника).
 
 
-
-n = int(input("Write size n:" ))
-m = int(input("Write size m:" ))
-k = int(input("Write count k:" ))
-if(n*m%k==0)or(n*m-k>0):
+n = int(input("Write size n:"))
+m = int(input("Write size m:"))
+k = int(input("Write count k:"))
+if (n * m % k == 0) or (n * m - k > 0):
     print("yes")
 else:
     print("no")
