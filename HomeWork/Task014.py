@@ -2,7 +2,6 @@
 #  не превосходящие числа N.
 n = int(input("Введите число: "))
 i = 1
-while n>=i:
+while n >= i:
     print(i)
-    i = i*2
-
+    i = i * 2
