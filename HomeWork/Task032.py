@@ -17,3 +17,5 @@ for i in array:
         index.append(j)
     j += 1
 print(index)
+
+print([ind for ind, val in enumerate(array)if min <= val <= max])

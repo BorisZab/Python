@@ -14,5 +14,6 @@ for _ in range(n):
     i+=1
 print(array)
 
-
+# for j in range(n):
+#     print(a+j*d,  end=' ') 
 
