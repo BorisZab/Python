@@ -26,10 +26,12 @@ def read_records():
 
 def all_mas():
     global all_data, all_data_mas
-    for i in all_data:
-        i=0
-        all_data_mas.append(all_data[i].split())
-        i+=1
+    
+    for i in range(len(all_data)):
+        
+        s = list(map(str, all_data[i].split()))
+        all_data_mas.append(s)
+        
     return all_data_mas
 
 
@@ -46,23 +48,38 @@ def add_record():
     for i in array:
         string = string + input(f" enter {i} ")+ " " 
     id +=1
-    # print(f'{id} {string}')2
-
+    
     with open(file_base,"a", encoding="utf-8") as f:
         f.write(f'{id} {string}\n')
         pass
     
 def delete_record():
-    global id, all_data,file_base,file_edit
-    del_rec = int(input("Chose ID record for delete:"))
-    all_data = [k for k in all_data if k[0] != del_rec]
+    # global id, all_data, all_data_mas
+    # symbol= "\n"
+    # del_rec = input("Chose ID record for delete:")
+    # temp = [item[0] for item in all_data]
+    # print(temp)
+    # index = all_data[temp.index(int(del_rec))]
+    # if int(del_rec)  in temp:
+    #     for i in range(len((all_data))):
+    #         if all_data[index] != del_rec:
+    #             x = all_data[index]
+    #             all_data.append(x)
+    #     all_data = [k for k in all_data if k[0] != del_rec]
+    #     print(all_data)
 
-    print(all_data)
+    #     with open(file_base, 'w', encoding="utf-8") as f:
+    #         f.write(f'{symbol.join(all_data)}\n')
+    #     print("Record deleted!\n")
+    # else:
+    #     print("Not correct ID !\n ")
+
+    # print(all_data)
 
     pass
 
 def edit_record():
-    # read_records()
+   
     all_mas()
     print(*all_data_mas)
     
@@ -71,12 +88,12 @@ def search_menu():
     
     global id, all_data, all_data_mas
     play = True
-    
+   
     while play:
         read_records()
         all_mas()
         temp=[]
-        check =-1
+     
         answer1 = input("Choose for search:\n"
                                 "1. id\n"
                                 "2. surname\n"
@@ -86,63 +103,46 @@ def search_menu():
                                 "6. exit\n")
         match answer1:
             case "1":
-                search = int(input("Write Id:"))-1
-                if search >= 0 and search <= id:
-                    print(all_data[search])
+                search = input("Write Id:")
+                temp = [item[0] for item in all_data]
+                if search in temp:
+                    print(all_data[int(search)])
                 else:
                     print("Id not found!")                    
             case "2":
                 search = input("Write surname:")
-                can = [k for k in all_data_mas if k[1] == search]
-                print()
-                print(can[2][0])
-                
-                # i= 0
-                # for i in range(len(all_data_mas)):
-                #     for j in range(len(all_data_mas[i])):
-                #         if search == all_data_mas[i][1]:
-                #             print(all_data[i]) 
-                #             break            
-                #         else:
-                #             print("surname not found!")  
-                #     i+=1
-                # i = int(0)
-                # for i in range(len(all_data_mas)):
-                # while i <= 3:
-                #         check = all_data_mas[i][1]
-                #         temp.append(check)
-                #         i=i+1
-                    # if search in all_data:
-                    #     print("1")
-                    # else:
-                    #     print("2")
-                   
-                pass
+                temp = [item[1] for item in all_data_mas]
+                if search not in temp:
+                    print("Surname not found!\n")
+                else:
+                    print(all_data[temp.index(search)])
             case "3":
+                search = input("Write surname:")
+                temp = [item[2] for item in all_data_mas]
+                if search not in temp:
+                    print("Name not found!\n")
+                else:
+                    print(all_data[temp.index(search)])
                 pass
             case "4":
+                search = input("Write surname:")
+                temp = [item[3] for item in all_data_mas]
+                if search not in temp:
+                    print("Surname_2 not found!\n")
+                else:
+                    print(all_data[temp.index(search)])
                 pass
             case "5":
-                # i=0
-                # search = input("Write phone number:")
-                # for i in range(len(all_data_mas)):
-                #     find = all_data_mas[i][4]
-                #     # if find == search:
-                #     #     print(all_data_mas[i])
-                #     print(find)
-                # i=i+1
-                # else:
-                #     print("Id not found!")  
-                pass
+                search = input("Write surname:")
+                temp = [item[4] for item in all_data_mas]
+                if search not in temp:
+                    print("Phone number not found!\n")
+                else:
+                    print(all_data[temp.index(search)])
+                pass 
             case "6":
                 play = False
-                
-    # вывести весь список и попросить выбрать ид,
-    # затем только поределенный констакт
-
-
-
-
+               
 
 def main_menu():
     play = True
@@ -171,8 +171,6 @@ def main_menu():
             case _:
                 print("Try again!\n")
 main_menu()
-# print(read_records())
-# read_records()
 
     
 
