@@ -3,7 +3,7 @@
 from os import path
 
 file_base = "base.txt"
-file_edit = "edit.txt"
+
 all_data = []
 id = 0
 all_data_mas = []
@@ -11,9 +11,7 @@ if not path.exists(file_base):
     with open(file_base,"w", encoding="utf-8") as _:
         pass
 
-if not path.exists(file_edit):
-    with open(file_edit,"w", encoding="utf-8") as _:
-        pass
+
 
 def read_records():
     global all_data, id
@@ -54,34 +52,48 @@ def add_record():
         pass
     
 def delete_record():
-    # global id, all_data, all_data_mas
-    # symbol= "\n"
-    # del_rec = input("Chose ID record for delete:")
-    # temp = [item[0] for item in all_data]
-    # print(temp)
-    # index = all_data[temp.index(int(del_rec))]
-    # if int(del_rec)  in temp:
-    #     for i in range(len((all_data))):
-    #         if all_data[index] != del_rec:
-    #             x = all_data[index]
-    #             all_data.append(x)
-    #     all_data = [k for k in all_data if k[0] != del_rec]
-    #     print(all_data)
+    
+    global  all_data
+    show_all()
+    del_rec = input("Chose ID record for delete:")
+    temp = [item[0] for item in all_data]
+    if del_rec  in temp:
+        print(f'Successful deletion {all_data[int(del_rec)]}')
+        all_data = [k for k in all_data if k[0] != del_rec]
+        with open(file_base,"w", encoding="utf-8") as f:
+         for line in all_data:
+                f.write(line)
+                f.write('\n')
+    else:
+        print("Not correct ID !\n ")
+    
+   
 
-    #     with open(file_base, 'w', encoding="utf-8") as f:
-    #         f.write(f'{symbol.join(all_data)}\n')
-    #     print("Record deleted!\n")
-    # else:
-    #     print("Not correct ID !\n ")
-
-    # print(all_data)
-
-    pass
+    
 
 def edit_record():
    
+    global file_base
+    show_all()
     all_mas()
-    print(*all_data_mas)
+    edit = input("Write ID for edit:")
+    temp = [item[0] for item in all_data]
+    if edit  in temp:
+        array = ['New surname', 'New name','New surname_2','New phone_number']
+        string = ''
+        for i in array:
+            string = string + input(f" enter {i} ")+ " " 
+        for i in range(len(all_data)):
+            if all_data[temp.index(edit)] == all_data[i]:
+                all_data[temp.index(edit)] = string
+        with open(file_base,"w", encoding="utf-8") as f:
+            for line in all_data:
+                f.write(line)
+                f.write('\n')
+        print("Successful edit!')")
+    else:
+        print("Not correct ID !\n ")
+    
     
 
 def search_menu():
