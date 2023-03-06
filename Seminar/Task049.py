@@ -73,26 +73,84 @@ def delete_record():
 
 def edit_record():
    
-    global file_base
+    global all_data,all_data_mas
     show_all()
     all_mas()
-    edit = input("Write ID for edit:")
+    string = ''
+    edit_id = input("Chose ID record for edit:")
     temp = [item[0] for item in all_data]
-    if edit  in temp:
-        array = ['New surname', 'New name','New surname_2','New phone_number']
-        string = ''
-        for i in array:
-            string = string + input(f" enter {i} ")+ " " 
-        for i in range(len(all_data)):
-            if all_data[temp.index(edit)] == all_data[i]:
-                all_data[temp.index(edit)] = string
-        with open(file_base,"w", encoding="utf-8") as f:
-            for line in all_data:
-                f.write(line)
-                f.write('\n')
-        print("Successful edit!')")
+    print(temp)
+    if edit_id in temp:
+        play = True
+        print(all_data[temp.index(edit_id)])
+        while play:
+            read_records()
+            answer = input("Phone book:\n"
+                       "1. Edit surname\n"
+                       "2. Edit name\n"
+                       "3. Edit surname_2\n"
+                       "4. Edit phone_number\n"
+                       "0. Exit\n")
+                       
+            match answer:
+                case "1":
+                    edit = input("Write new surname:")
+                    all_data_mas[temp.index(edit_id)][1]= edit
+                    for i in range(len(all_data_mas[temp.index(edit_id)])):
+                        string = string + all_data_mas[temp.index(edit_id)][i] + " "
+                    for i in range(len(all_data)):
+                        if all_data[temp.index(edit_id)] == all_data[i]:
+                            all_data[temp.index(edit_id)] = string
+                    with open(file_base,"w", encoding="utf-8") as f:
+                        for line in all_data:
+                            f.write(line)
+                            f.write('\n')
+                    print(f'Successful deletion {all_data[temp.index(edit_id)]}')
+
+                case "2":
+                    edit = input("Write new name:")
+                    all_data_mas[temp.index(edit_id)][2]= edit
+                    for i in range(len(all_data_mas[temp.index(edit_id)])):
+                        string = string + all_data_mas[temp.index(edit_id)][i] + " "
+                    for i in range(len(all_data)):
+                        if all_data[temp.index(edit_id)] == all_data[i]:
+                            all_data[temp.index(edit_id)] = string
+                    with open(file_base,"w", encoding="utf-8") as f:
+                        for line in all_data:
+                            f.write(line)
+                            f.write('\n')
+                    print(f'Successful deletion {all_data[temp.index(edit_id)]}')
+                case "3":
+                    edit = input("Write new surname_2:")
+                    all_data_mas[temp.index(edit_id)][3]= edit
+                    for i in range(len(all_data_mas[temp.index(edit_id)])):
+                        string = string + all_data_mas[temp.index(edit_id)][i] + " "
+                    for i in range(len(all_data)):
+                        if all_data[temp.index(edit_id)] == all_data[i]:
+                            all_data[temp.index(edit_id)] = string
+                    with open(file_base,"w", encoding="utf-8") as f:
+                        for line in all_data:
+                            f.write(line)
+                            f.write('\n')
+                    print(f'Successful deletion {all_data[temp.index(edit_id)]}')
+                case "4":
+                    edit = input("Write new phone_number:")
+                    all_data_mas[temp.index(edit_id)][4]= edit
+                    for i in range(len(all_data_mas[temp.index(edit_id)])):
+                        string = string + all_data_mas[temp.index(edit_id)][i] + " "
+                    for i in range(len(all_data)):
+                        if all_data[temp.index(edit_id)] == all_data[i]:
+                            all_data[temp.index(edit_id)] = string
+                    with open(file_base,"w", encoding="utf-8") as f:
+                        for line in all_data:
+                            f.write(line)
+                            f.write('\n')
+                    print(f'Successful deletion {all_data[temp.index(edit_id)]}')
+                case "0":
+                    play= False
     else:
         print("Not correct ID !\n ")
+   
     
     
 
@@ -112,7 +170,7 @@ def search_menu():
                                 "3. name\n"
                                 "4. surname_2\n"
                                 "5. phone number\n"
-                                "6. exit\n")
+                                "0. exit\n")
         match answer1:
             case "1":
                 search = input("Write Id:")
@@ -152,7 +210,7 @@ def search_menu():
                 else:
                     print(all_data[temp.index(search)])
                 pass 
-            case "6":
+            case "0":
                 play = False
                
 
@@ -166,7 +224,7 @@ def main_menu():
                        "3. Search a record\n"
                        "4. Delete record\n"
                        "5. Edit record\n"
-                       "6. Exit\n")
+                       "0. Exit\n")
         match answer:
             case "1":
                 show_all()
@@ -178,7 +236,7 @@ def main_menu():
                 delete_record()
             case "5":
                 edit_record()
-            case "6":
+            case "0":
                 play = False
             case _:
                 print("Try again!\n")
